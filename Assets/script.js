@@ -1,31 +1,114 @@
 const apiKey = '58f4ff6b22f562aa33f26ce8e835f1a2';
 const city = 'Portland';
-
+let today;
 const cityNameElement = document.getElementById('city-name');
 const temperatureElement = document.getElementById('temperature');
 const descriptionElement = document.getElementById('description');
 const humidityElement = document.getElementById('humidity');
 const windSpeedElement = document.getElementById('wind-speed');
-const cityinput= document.getElementById('city')
-const searchbtn= document.getElementById('search')
-searchbtn.addEventListener('click',searchweather)
+const cityinput = document.getElementById('city')
+const searchbtn = document.getElementById('search')
+searchbtn.addEventListener('click', function () {
+  const city = cityinput.value
+  searchweather(city)
+  weeklyForecast(city)
+})
 
-function searchweather(){
-    console.log(cityinput.value)
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityinput.value}&appid=${apiKey}&units=imperial`)
-    .then(response => response.json())
-    .then(data => {
-        console.log(data)
-      cityNameElement.textContent = cityinput.value;
-      temperatureElement.textContent = `Temperature: ${data.list[0].main.temp}°C`;
-      descriptionElement.textContent = `Description: ${data.list[0].weather[0].description}`;
-      humidityElement.textContent = `Humidity: ${data.list[0].main.humidity}%`;
-      windSpeedElement.textContent = `Wind Speed: ${data.list[0].wind.speed}m/s`;
-    })
-    .catch(error => console.log(error));
-  
+const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday','Thursday', 'Friday', 'Saturday'];
+const d = new Date();
+const todayIndex = d.getDay();
+for(let i=0; i<5; i++) {
+  const weekdayIndex = todayIndex +i;
+  const weekday = weekdays[weekdayIndex % 7];
 
-    
+  document.getElementById('day${i+1}').innerHTML = weekday;
 }
 
 
+
+
+
+
+  function searchweather(city) {
+    console.log(cityinput.value)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`)
+      .then(response => response.json())
+      .then(data => {
+         console.log(data)
+        cityNameElement.textContent = cityinput.value;
+        temperatureElement.textContent = `Temperature: ${data.main.temp}°C`;
+        descriptionElement.textContent = `Description: ${data.weather[0].description}`;
+        humidityElement.textContent = `Humidity: ${data.main.humidity}%`;
+        windSpeedElement.textContent = `Wind Speed: ${data.wind.speed}m/s`;
+        today =  dt_txt.split(" ")[0]
+
+
+      })
+      .catch(error => console.log(error));
+
+
+
+  }
+
+  {/* <div class="day2">
+                    <p id="temperature"></p>
+                    <p id="description"></p>
+                    <p id="humidity"></p>
+                    <p id="wind-speed"></p>
+                </div> */}
+  function weeklyForecast(city) {
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=45.5234&lon=-122.6762&appid=${apiKey}`)
+      .then(response => response.json())
+      .then(data => {
+
+        var dataArr = data.list;
+        console.log(dataArr,"%day")
+        let htmlCode = ""
+        for (let i = 0; i < dataArr.length; i++) {
+          const time = dataArr[i].dt_txt.split(" ")[0]
+          if (time !== today) {
+          htmlCode = `      <div class="today">
+          <p id="temperature"></p>
+          <p id="description"></p>
+          <p id="humidity"></p>
+          <p id="wind-speed"></p>
+      </div>    
+          `
+          today= time
+          }
+        }
+
+        const apiKey = '58f4ff6b22f562aa33f26ce8e835f1a2';
+
+fetch(`https://api.example.com/data?apiKey=${apiKey}`)
+  .then(response => response.json())
+  .then(data => {
+
+    // Render data for day 56910203040
+    renderData(data[5]);
+
+  });
+
+function renderData(dayData) {
+
+  // Get container element
+  const container = document.getElementById('data-container'); 
+  
+  // Create element for day 5
+  const day5 = document.createElement('div');
+  day5.classList.add('day');
+  
+  // Add day 5 data 
+  day5.innerText = dayData.summary; 
+  
+  // Append to container
+  container.appendChild(day5);
+
+}
+
+
+
+
+      })
+      .catch(error => console.log(error));
+  }

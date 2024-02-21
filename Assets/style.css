@@ -5,14 +5,23 @@
     justify-content: center;
     height: 100vh;
     font-family: Arial, sans-serif;
+    flex-wrap:wrap;
   }
   
+.day1{
+  display:grid;
+  width: 100px;
+  height: 150px;
+  background-color: aqua;
+}
+
   .card {
-    background-color: #f4f4f4;
+    background-color: #c93838;
     border-radius: 5px;
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
+    
   }
   
   .card h2 {
@@ -25,9 +34,10 @@
 #weather-info{
     display: flex;
 }
-  .day1,.day2,.day3,.day4{
+  .day1,.day2,.day3,.day4,.day5,.day6{
+    display: flexbox;
     width: 100px;
     height: 150px;
-    background-color: rgb(119, 6, 6);
+    background-color: rgb(18, 197, 125);
     margin: 5px;
   }
