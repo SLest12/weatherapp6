@@ -1,43 +1,111 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    font-family: Arial, sans-serif;
-    flex-wrap:wrap;
-  }
-  
-.day1{
-  display:grid;
-  width: 100px;
-  height: 150px;
-  background-color: aqua;
+@import url('https://fonts.googleapis.com/css2?family=Gruppo&family=Madimi+One&family=Manrope:wght@200..800&family=Oswald:wght@200..700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+
 }
 
-  .card {
-    background-color: #c93838;
-    border-radius: 5px;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    
-  }
-  
-  .card h2 {
-    margin-top: 0;
-  }
-  
-  #weather-info p {
-    margin: 5px 0;
-  }
-#weather-info{
-    display: flex;
+body {
+  background: rgb(150, 220, 150);
+  margin: auto;
 }
-  .day1,.day2,.day3,.day4,.day5,.day6{
-    display: flexbox;
-    width: 100px;
-    height: 150px;
-    background-color: rgb(18, 197, 125);
-    margin: 5px;
-  }
+
+h1 {
+  color: rgb(69, 77, 184);
+  padding: 18px 0;
+  text-align: center;
+  background: rgb(112, 159, 42);
+}
+
+
+.container {
+  margin: auto;
+  display: grid;
+  place-content: center;
+  gap: 35px;
+  padding: 30px;
+}
+
+.card {
+  width: 550px;
+}
+
+.card input {
+  width: 100%;
+  height: 46px;
+}
+
+#search {
+  background-color: #414745;
+  border: none;
+  color: rgb(32, 97, 74);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+#city {
+  background-color: rgb(64, 0, 255);
+}
+
+#city-name {
+  border: none;
+  color: rgb(197, 235, 85);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+}
+
+
+.today {
+  color: rgb(32, 84, 67);
+  text-align: left;
+  margin: 0 auto;
+  width: 50;
+  justify-content: flex-end;
+}
+
+
+#forecast.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 1em;
+
+}
+
+#forecast.container.today {
+  display: flex;
+  padding: 15px;
+}
+
+
+.card {
+  background-color: #3894c9;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+}
+
+
+
+#weather-info p {
+  margin: 5px 0;
+}
+
+#weather-info {
+  display: grid;
+  position: line;
+  justify-content: center;
+}

@@ -40,7 +40,7 @@ function searchweather(city) {
       descriptionElement.textContent = `Description: ${data.weather[0].description}`;
       humidityElement.textContent = `Humidity: ${data.main.humidity}%`;
       windSpeedElement.textContent = `Wind Speed: ${data.wind.speed}m/s`;
-      today = dt_txt.split(" ")[0]
+      //today = dt_txt.split(" ")[0]
 
 
     })
@@ -68,28 +68,22 @@ function weeklyForecast(city) {
         const time = dataArr[i].dt_txt.split(" ")[0]
         if (time !== today) {
           htmlCode += `      <div class="today">
+          <img src="http://openweathermap.org/img/wn/${dataArr[i].weather[0].icon}@2x.png" alt="weather-icon">
           <h3 id="day">${time}</h3>
           <p id="temperature">${dataArr[i].main.temp}</p>
         
-          <p id="humidity"></p>
-          <p id="wind-speed"></p>
+           <p id="humidity">${dataArr[i].main.humidity}</p>
+          <p id="wind-speed">${dataArr[i].main.wind}</p>
       </div>    
           `
           today = time
         }
 
       }
-document.getElementById('forecast').innerHTML = htmlCode;
+      document.getElementById('forecast').innerHTML = htmlCode;
       const apiKey = '58f4ff6b22f562aa33f26ce8e835f1a2';
 
-      fetch(`https://api.example.com/data?apiKey=${apiKey}`)
-        .then(response => response.json())
-        .then(data => {
 
-          // Render data for day 56910203040
-          renderData(data[5]);
-
-        });
 
       function renderData(dayData) {
 
@@ -115,24 +109,3 @@ document.getElementById('forecast').innerHTML = htmlCode;
     .catch(error => console.log(error));
 }
 
-fetch(`https://api.example.com/data?apiKey=${apiKey}`)
-  .then(response => response.json())
-  .then(data => {
-
-    // Render data for day 56910203040
-    renderData(data[5]);
-
-  });
-// in this fetch call we are not checking for errors this could be bad since we do not get a descriptive message so lets do the following
-
-fetch(`https://api.example.com/data?apiKey=${apiKey}`)
-  .then(response => {
-    if (response.ok) { return response.json() }
-    throw new Error('Failed to retrieve weather')
-  })
-  .then(data => {
-
-    // Render data for day 56910203040
-    renderData(data[5]);
-
-  }).catch((err) => console.log('Error while fetching weather', err));
